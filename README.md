@@ -1,6 +1,6 @@
 # codoxify
 
-Uses [codox](https://github.com/weavejester/codox) to build Clojure documentation for [docsify](https://github.com/docsifyjs/docsify)
+Use [codox](https://github.com/weavejester/codox) to build Clojure documentation for [docsify](https://github.com/docsifyjs/docsify)
 
 ## Usage
 
@@ -10,7 +10,8 @@ Add `codoxify` as a dependency to your `project.clj`:
 
 ```clojure
 :profiles {:codox {:dependencies [[codox "1.0.0"]]
-                   :plugins [[lein-codox "0.10.7"]]}}
+                   :plugins      [[lein-codox "0.10.7"]]
+                   :codox        {:writer codoxify.writer/write-docs}}}
 ```
 
 Without any extra configuration, this will compile your documentation to `target/docs`
