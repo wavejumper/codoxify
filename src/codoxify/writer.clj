@@ -163,6 +163,8 @@
 (defn generate-ns-md
   [project ns]
   (write-lines (into [(format "# %s" (:name ns))
+                      (when (:added ns)
+                        (format "**Added:** %s\n" (:added ns)))
                       (when (:doc ns)
                         (write-lines ["" (:doc ns) ""]))]
                      (mapcat (partial render-var project))
