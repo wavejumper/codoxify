@@ -1,6 +1,6 @@
-(defproject wavejumper/tonal "3.6.5-4"
-  :description "Codox writer for docsify"
-  :url "https://github.com/wavejumper/tonal-clj"
+(defproject wavejumper/codox "1.0.0"
+  :description "Generate Clojure docs for docsify"
+  :url "https://github.com/wavejumper/codox"
 
   :license {:name "MIT"
             :url "http://opensource.org/licenses/MIT"}
