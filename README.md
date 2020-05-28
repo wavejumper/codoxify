@@ -22,6 +22,21 @@ npx docsify serve ./target/docs
 lein with-profiles +codox codox
 ```
 
+### docsify configuration
+
+edit `./target/docs/index.html` and configure docsify as such:
+
+```javascript
+    window.$docsify = {
+      loadSidebar: true,
+      subMaxLevel: 3, // important
+      loadNavbar: true,
+      alias: {
+        'sidebar.md': '/_sidebar.md' //important
+      }
+    }
+```
+
 ## Example
 
 An example of the [ring](https://github.com/ring-clojure/ring) project generated with codoxify can be found [here](https://tscrowley.dev/codoxify/)
