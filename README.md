@@ -19,7 +19,7 @@ Without any extra configuration, this will compile your documentation to `target
 ```
 npx init ./target/docs
 npx docsify serve ./target/docs
-lein codox
+lein with-profiles +codox codox
 ```
 
 ## Example
