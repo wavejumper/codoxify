@@ -1,5 +1,7 @@
 (ns codoxify.writer
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.java.io :as io])
+  (:import (java.io File)))
 
 (defn- strip-prefix [s prefix]
   (if s (str/replace s (re-pattern (str "(?i)^" prefix)) "")))
@@ -71,77 +73,121 @@
                        (map namespace-section)
                        namespaces))))
 
-(defn write-index
-  [_ project]
-  (let [md (write-lines
-            [(format "# %s %s {docsify-ignore-all}" (:name project) (:version project))
-             (description-section (:description project))
-             (license-section (:license project))
-             (package-section (package project) (:version project))
-             (topics-section (:documents project))
-             (namespaces-section (:namespaces project))
+(defn generate-index-md
+  [project]
+  (write-lines
+   [(format "# %s %s {docsify-ignore-all}" (:name project) (:version project))
+    (description-section (:description project))
+    (license-section (:license project))
+    (package-section (package project) (:version project))
+    (topics-section (:documents project))
+    (namespaces-section (:namespaces project))]))
 
-             ])]
-    md))
-
-(defn ^:deprecated multi-arity
-  "*** This is a docstring ***"
-  ([a])
-  ([a b]))
-
-(defn write-sidebar
+(defn generate-sidebar-md
   [project]
   (write-lines (into ["* [Overview](/)"]
                      (map (fn [ns]
                             (format "* [%s](%s)" (:name ns) (str "/" (:name ns)))))
                      (sort-by :name (:namespaces project)))))
 
-(defprotocol MyProtocol
-  (foo [this]))
-
 (defn arglists [args]
   (when (seq args)
-    (write-lines
-     (for [arg args]
-       (str "`" arg "`\n")))))
+    (write-lines ["**Arguments:**"
+                  "```clojure"
+                  (write-lines args)
+                  "```"])))
 
 (defmulti render-var (fn [ctx var] (:type var)))
 
+(defn escape-name [name]
+  (str/replace name #"\*" "\\\\*"))
+
+(defn- get-source-uri [source-uris path]
+  (some (fn [[re f]] (if (re-find re path) f)) source-uris))
+
+(defn- uri-basename [path]
+  (second (re-find #"/([^/]+?)$" path)))
+
+(defn uri-path [path]
+  (str/replace (str path) File/separator "/"))
+
+(defn- force-replace [^String s match replacement]
+  (if (.contains s match)
+    (str/replace s match (force replacement))
+    s))
+
+(defn- var-source-uri
+  [{:keys [source-uri version git-commit]}
+   {:keys [path file line]}]
+  (let [path (uri-path path)
+        uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)]
+    (-> uri
+        (str/replace   "{filepath}"   path)
+        (str/replace   "{classpath}"  (uri-path file))
+        (str/replace   "{basename}"   (uri-basename path))
+        (str/replace   "{line}"       (str line))
+        (str/replace   "{version}"    (str version))
+        (force-replace "{git-commit}" git-commit))))
+
+(defn view-source [ctx v]
+  (format "[View source](%s)" (var-source-uri ctx v)))
+
 (defmethod render-var :default
-  [{:keys [nested?]} v]
+  [{:keys [nested?] :as ctx} v]
   (let [indentation (if nested? "###" "##")]
     [(if (:deprecated v)
-       (format "%s ~%s~" indentation (:name v))
-       (format "%s %s" indentation (:name v)))
-     (:doc v)
+       (format "%s ~%s~" indentation (escape-name (:name v)))
+       (format "%s %s" indentation (escape-name (:name v))))
+     (format "**Type:** %s\n" (name (:type v)))
+     (when (:added v)
+       (format "**Added:** %s\n" (:added v)))
+     (when (:dynamic v)
+       "**Dynamic:** true\n")
      (arglists (:arglists v))
+     (:doc v)
      (when-not nested?
-       (format "[View source](%s)" "#"))]))
+       (view-source ctx v))]))
 
 (defmethod render-var :protocol
-  [_ v]
-  (into [(if (:deprecated v)
-           (format "## ~%s~" (:name v))
-           (format "## %s" (:name v)))
-         (:doc v)
-         (format "[View source](%s)" "#")]
-        (mapcat (partial render-var {:nested? true}))
-        (:members v)))
+  [ctx v]
+  (-> (into [(if (:deprecated v)
+               (format "## ~%s~" (:name v))
+               (format "## %s" (:name v)))
+             "**Type:** protocol"
+             (:doc v)]
+            (mapcat (partial render-var (assoc ctx :nested? true)))
+            (:members v))
+      (conj (format "[View source](%s)" "#"))))
 
-(defn write-ns [ns]
+(defn generate-ns-md
+  [project ns]
   (write-lines (into [(format "# %s" (:name ns))
                       (when (:doc ns)
                         (write-lines ["" (:doc ns) ""]))]
-                     (mapcat (partial render-var nil))
+                     (mapcat (partial render-var project))
                      (sorted-public-vars ns))))
+
+(defn- make-parent-dir!
+  [file]
+  (-> file io/file .getParentFile .mkdirs))
+
+(defn write!
+  [output-dir file s]
+  (let [file (io/file output-dir file)]
+    (make-parent-dir! file)
+    (spit file s)))
+
+(defn write-namespaces!
+  [output-dir project]
+  (doseq [ns (:namespaces project)]
+    (let [file (io/file output-dir (str (:name ns) ".md"))]
+      (make-parent-dir! file)
+      (spit file (generate-ns-md project ns)))))
 
 (defn write-docs
   [{:keys [output-path] :as project}]
-  (spit "project.edn" (pr-str project))
-  (spit "docs/_sidebar.md" (write-sidebar project))
-  (spit "docs/README.md" (write-index nil project))
-  (doseq [ns (:namespaces project)]
-    (spit (str "docs/" (:name ns) ".md")
-          (write-ns ns)
-          ))
-  (println (write-index nil project)))
+  (make-parent-dir! output-path)
+  (doto output-path
+    (write! "_sidebar.md" (generate-sidebar-md project))
+    (write! "README.md" (generate-index-md project))
+    (write-namespaces! project)))
