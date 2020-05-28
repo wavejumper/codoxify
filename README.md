@@ -24,7 +24,7 @@ lein with-profiles +codox codox
 
 ### docsify configuration
 
-edit `./target/docs/index.html` and configure docsify as such:
+Edit `./target/docs/index.html` and configure docsify as such:
 
 ```javascript
     window.$docsify = {
