@@ -1,5 +1,6 @@
 # ring.middleware.params
 
+
 Middleware to parse url-encoded parameters from the query string and request
 body.
 
@@ -15,6 +16,7 @@ body.
 ```
 Parse and assoc parameters from the request body with the request.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/params.clj#L21)
 ## assoc-query-params
 **Type:** var
@@ -27,6 +29,7 @@ Parse and assoc parameters from the request body with the request.
 [request encoding]
 ```
 Parse and assoc parameters from the query string with the request.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/params.clj#L11)
 ## params-request
@@ -42,6 +45,7 @@ Parse and assoc parameters from the query string with the request.
 ```
 Adds parameters from the query string and the request body to the request
 map. See: wrap-params.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/params.clj#L31)
 ## wrap-params
 **Type:** var
@@ -66,4 +70,5 @@ Accepts the following options:
 :encoding - encoding to use for url-decoding. If not specified, uses
             the request character encoding, or "UTF-8" if no request
             character encoding is set.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/params.clj#L48)

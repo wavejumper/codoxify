@@ -1,5 +1,6 @@
 # ring.middleware.nested-params
 
+
 Middleware to convert a single-depth map of parameters to a nested map.
 
 
@@ -16,6 +17,7 @@ Middleware to convert a single-depth map of parameters to a nested map.
 ```
 Converts a request with a flat map of parameters to a nested map.
 See: wrap-nested-params.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/nested_params.clj#L58)
 ## parse-nested-keys
 **Type:** var
@@ -33,6 +35,7 @@ For example:
 
   "foo[bar][][baz]"
   => ["foo" "bar" "" "baz"]
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/nested_params.clj#L5)
 ## wrap-nested-params
 **Type:** var
@@ -59,4 +62,5 @@ For example:
 
   {"foo[]" "bar"}
   => {"foo" ["bar"]}
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/nested_params.clj#L68)

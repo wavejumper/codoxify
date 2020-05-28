@@ -1,5 +1,6 @@
 # ring.util.request
 
+
 Functions for augmenting and pulling information from request maps.
 
 
@@ -15,6 +16,7 @@ Functions for augmenting and pulling information from request maps.
 ```
 Return the request body as a string.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L45)
 ## character-encoding
 **Type:** var
@@ -27,6 +29,7 @@ Return the request body as a string.
 [request]
 ```
 Return the character encoding for the request, or nil if it is not set.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L31)
 ## content-length
@@ -41,6 +44,7 @@ Return the character encoding for the request, or nil if it is not set.
 ```
 Return the content-length of the request, or nil no content-length is set.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L24)
 ## content-type
 **Type:** var
@@ -53,6 +57,7 @@ Return the content-length of the request, or nil no content-length is set.
 [request]
 ```
 Return the content-type of the request, or nil if no content-type is set.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L16)
 ## in-context?
@@ -67,6 +72,7 @@ Return the content-type of the request, or nil if no content-type is set.
 ```
 Returns true if the URI of the request is a subpath of the supplied context.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L71)
 ## path-info
 **Type:** var
@@ -79,6 +85,7 @@ Returns true if the URI of the request is a subpath of the supplied context.
 [request]
 ```
 Returns the relative path of the request.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L64)
 ## request-url
@@ -93,6 +100,7 @@ Returns the relative path of the request.
 ```
 Return the full URL of the request.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L5)
 ## set-context
 **Type:** var
@@ -106,6 +114,7 @@ Return the full URL of the request.
 ```
 Associate a context and path-info with the  request. The request URI must be
 a subpath of the supplied context.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L77)
 ## urlencoded-form?
 **Type:** var
@@ -118,5 +127,6 @@ a subpath of the supplied context.
 [request]
 ```
 True if a request contains a urlencoded form in the body.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/request.clj#L38)

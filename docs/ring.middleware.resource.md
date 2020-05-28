@@ -1,5 +1,6 @@
 # ring.middleware.resource
 
+
 Middleware for serving static resources.
 
 
@@ -16,6 +17,7 @@ Middleware for serving static resources.
 ```
 If request matches a static resource, returns it in a response map.
 Otherwise returns nil. See wrap-resource for the available options.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/resource.clj#L9)
 ## wrap-resource
 **Type:** var
@@ -39,4 +41,5 @@ Accepts the following options:
                    classpath directories (defaults to false)
 :prefer-handler? - prioritize handler response over resources (defaults to
                    false)
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/resource.clj#L48)

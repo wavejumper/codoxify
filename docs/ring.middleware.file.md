@@ -1,5 +1,6 @@
 # ring.middleware.file
 
+
 Middleware to serve files from a directory.
 
 Most of the time you should prefer ring.middleware.resource instead, as this
@@ -18,6 +19,7 @@ middleware will not work with files in jar or war files.
 ```
 If request matches a static file, returns it in a response. Otherwise
 returns nil. See: wrap-file.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/file.clj#L19)
 ## wrap-file
 **Type:** var
@@ -38,4 +40,5 @@ Accepts the following options:
 :index-files?    - look for index.* files in directories, defaults to true
 :allow-symlinks? - serve files through symbolic links, defaults to false
 :prefer-handler? - prioritize handler response over files, defaults to false
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/file.clj#L59)

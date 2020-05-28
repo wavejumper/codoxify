@@ -1,5 +1,6 @@
 # ring.middleware.cookies
 
+
 Middleware for parsing and generating cookies.
 
 
@@ -17,6 +18,7 @@ Middleware for parsing and generating cookies.
 ```
 
 
+
 [View source](#)
 ## CookieInterval
 **Type:** protocol
@@ -30,6 +32,7 @@ Middleware for parsing and generating cookies.
 ```clojure
 [this]
 ```
+
 
 
 [View source](#)
@@ -46,6 +49,7 @@ Middleware for parsing and generating cookies.
 ```
 Parses cookies in the request map. See: wrap-cookies.
 
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/cookies.clj#L153)
 ## cookies-response
 **Type:** var
@@ -60,6 +64,7 @@ Parses cookies in the request map. See: wrap-cookies.
 ```
 For responses with :cookies, adds Set-Cookie header and returns response
 without :cookies. See: wrap-cookies.
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/cookies.clj#L164)
 ## wrap-cookies
 **Type:** var
@@ -100,4 +105,5 @@ keys:
 :http-only - set to true if the cookie is valid for HTTP and HTTPS only
              (ie. prevent JavaScript access)
 :same-site - set to :strict or :lax to set SameSite attribute of the cookie
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/cookies.clj#L176)

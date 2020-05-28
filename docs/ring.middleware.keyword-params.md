@@ -1,5 +1,6 @@
 # ring.middleware.keyword-params
 
+
 Middleware that converts parameter keys in the request to keywords.
 
 
@@ -15,6 +16,7 @@ Middleware that converts parameter keys in the request to keywords.
 [request options]
 ```
 Converts string keys in :params map to keywords. See: wrap-keyword-params.
+
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/keyword_params.clj#L29)
 ## wrap-keyword-params
@@ -37,4 +39,5 @@ Accepts the following options:
 
 :parse-namespaces? - if true, parse the parameters into namespaced keywords
                      (defaults to false)
+
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/keyword_params.clj#L37)
