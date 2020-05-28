@@ -1,3 +1,5 @@
+[![Clojars Project](https://img.shields.io/clojars/v/wavejumper/codoxify.svg)](https://clojars.org/wavejumper/codoxify)
+
 # codoxify
 
 Use [codox](https://github.com/weavejester/codox) to build Clojure documentation for [docsify](https://github.com/docsifyjs/docsify)
