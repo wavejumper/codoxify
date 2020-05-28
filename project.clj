@@ -1,4 +1,4 @@
-(defproject wavejumper/codox "1.0.0"
+(defproject wavejumper/codoxify "1.0.0"
   :description "Generate Clojure docs for docsify"
   :url "https://github.com/wavejumper/codox"
 
@@ -6,7 +6,7 @@
             :url "http://opensource.org/licenses/MIT"}
 
   :dependencies
-  [[org.clojure/clojure "1.10.1"]]
+  [[org.clojure/clojure "1.10.1" :scope "provided"]]
 
   :codox {:writer       codoxify.writer/write-docs
           :source-paths ["src"]
