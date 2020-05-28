@@ -1,8 +1,10 @@
 # ring.util.response
 
 
+```
 Functions for generating and augmenting response maps.
 
+```
 
 ## bad-request
 **Type:** var
@@ -14,8 +16,10 @@ Functions for generating and augmenting response maps.
 ```clojure
 [body]
 ```
+```
 Returns a 400 'bad request' response.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L47)
 ## charset
@@ -28,8 +32,10 @@ Returns a 400 'bad request' response.
 ```clojure
 [resp charset]
 ```
+```
 Returns an updated Ring response with the supplied charset added to the
 Content-Type header.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L211)
 ## content-type
@@ -41,8 +47,10 @@ Content-Type header.
 ```clojure
 [resp content-type]
 ```
+```
 Returns an updated Ring response with the a Content-Type header corresponding
 to the given content-type.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L180)
 ## created
@@ -56,8 +64,10 @@ to the given content-type.
 [url]
 [url body]
 ```
+```
 Returns a Ring response for a HTTP 201 created response.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L38)
 ## file-response
@@ -70,6 +80,7 @@ Returns a Ring response for a HTTP 201 created response.
 [filepath]
 [filepath options]
 ```
+```
 Returns a Ring response to serve a static file, or nil if an appropriate
 file does not exist.
 Options:
@@ -77,6 +88,7 @@ Options:
   :index-files?    - look for index.* files in directories (defaults to true)
   :allow-symlinks? - allow symlinks that lead to paths outside the root path
                      (defaults to false)
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L148)
 ## find-header
@@ -89,8 +101,10 @@ Options:
 ```clojure
 [resp header-name]
 ```
+```
 Looks up a header in a Ring response (or request) case insensitively,
 returning the header map entry, or nil if not present.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L186)
 ## get-charset
@@ -103,8 +117,10 @@ returning the header map entry, or nil if not present.
 ```clojure
 [resp]
 ```
+```
 Gets the character encoding of a Ring response.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L222)
 ## get-header
@@ -117,8 +133,10 @@ Gets the character encoding of a Ring response.
 ```clojure
 [resp header-name]
 ```
+```
 Looks up a header in a Ring response (or request) case insensitively,
 returning the value of the header, or nil if not present.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L195)
 ## header
@@ -130,8 +148,10 @@ returning the value of the header, or nil if not present.
 ```clojure
 [resp name value]
 ```
+```
 Returns an updated Ring response with the specified header added.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L80)
 ## not-found
@@ -144,8 +164,10 @@ Returns an updated Ring response with the specified header added.
 ```clojure
 [body]
 ```
+```
 Returns a 404 'not found' response.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L55)
 ## redirect
@@ -158,8 +180,10 @@ Returns a 404 'not found' response.
 [url]
 [url status]
 ```
+```
 Returns a Ring response for an HTTP 302 redirect. Status may be 
 a key in redirect-status-codes or a numeric code. Defaults to 302
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L20)
 ## ~redirect-after-post~
@@ -171,8 +195,10 @@ a key in redirect-status-codes or a numeric code. Defaults to 302
 ```clojure
 [url]
 ```
+```
 Returns a Ring response for an HTTP 303 redirect. Deprecated in favor
 of using redirect with a :see-other status.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L29)
 ## redirect-status-codes
@@ -182,8 +208,10 @@ of using redirect with a :see-other status.
 
 
 
+```
 Map a keyword to a redirect status code.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L12)
 ## resource-data
@@ -195,6 +223,7 @@ Map a keyword to a redirect status code.
 **Arguments:**
 ```clojure
 [url]
+```
 ```
 Returns data about the resource specified by url, or nil if an
 appropriate resource does not exist.
@@ -213,6 +242,7 @@ protocol, you will need to provide an implementation for that
 protocol.
 
 This function is used internally by url-response.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L244)
 ## resource-response
@@ -225,6 +255,7 @@ This function is used internally by url-response.
 [path]
 [path options]
 ```
+```
 Returns a Ring response to serve a packaged resource, or nil if the
 resource does not exist.
 Options:
@@ -232,6 +263,7 @@ Options:
   :loader          - resolve the resource in this class loader
   :allow-symlinks? - allow symlinks that lead to paths outside the root
                      classpath directories (defaults to false)
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L324)
 ## response
@@ -243,8 +275,10 @@ Options:
 ```clojure
 [body]
 ```
+```
 Returns a skeletal Ring response with the given body, status of 200, and no
 headers.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L63)
 ## response?
@@ -257,8 +291,10 @@ headers.
 ```clojure
 [resp]
 ```
+```
 True if the supplied value is a valid response map.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L236)
 ## set-cookie
@@ -271,8 +307,10 @@ True if the supplied value is a valid response map.
 ```clojure
 [resp name value & [opts]]
 ```
+```
 Sets a cookie on the response. Requires the handler to be wrapped in the
 wrap-cookies middleware.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L229)
 ## status
@@ -285,8 +323,10 @@ wrap-cookies middleware.
 [status]
 [resp status]
 ```
+```
 Returns an updated Ring response with the given status.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L71)
 ## update-header
@@ -299,9 +339,11 @@ Returns an updated Ring response with the given status.
 ```clojure
 [resp header-name f & args]
 ```
+```
 Looks up a header in a Ring response (or request) case insensitively,
 then updates the header with the supplied function and arguments in the
 manner of update-in.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L202)
 ## url-response
@@ -314,7 +356,9 @@ manner of update-in.
 ```clojure
 [url]
 ```
+```
 Return a response for the supplied URL.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/response.clj#L300)

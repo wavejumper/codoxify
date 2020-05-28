@@ -1,8 +1,10 @@
 # ring.middleware.multipart-params.temp-file
 
 
+```
 A multipart storage engine for storing uploads in temporary files.
 
+```
 
 ## temp-file-store
 **Type:** var
@@ -13,6 +15,7 @@ A multipart storage engine for storing uploads in temporary files.
 ```clojure
 []
 [options]
+```
 ```
 Returns a function that stores multipart file parameters as temporary files.
 Accepts the following options:
@@ -27,5 +30,6 @@ The multipart parameters will be stored as maps with the following keys:
 :tempfile     - a File object that points to the temporary file containing
                 the uploaded data
 :size         - the size in bytes of the uploaded data
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/multipart_params/temp_file.clj#L46)

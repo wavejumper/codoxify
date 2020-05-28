@@ -1,6 +1,7 @@
 # ring.middleware.multipart-params
 
 
+```
 Middleware that parses multipart request bodies into parameters.
 
 This middleware is necessary to handle file uploads from web browsers.
@@ -9,6 +10,7 @@ Ring comes with two different multipart storage engines included:
 
   ring.middleware.multipart-params.byte-array/byte-array-store
   ring.middleware.multipart-params.temp-file/temp-file-store
+```
 
 ## multipart-params-request
 **Type:** var
@@ -21,8 +23,10 @@ Ring comes with two different multipart storage engines included:
 [request]
 [request options]
 ```
+```
 Adds :multipart-params and :params keys to request.
 See: wrap-multipart-params.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/multipart_params.clj#L111)
 ## wrap-multipart-params
@@ -34,6 +38,7 @@ See: wrap-multipart-params.
 ```clojure
 [handler]
 [handler options]
+```
 ```
 Middleware to parse multipart parameters from a request. Adds the
 following keys to the request map:
@@ -64,5 +69,6 @@ The following options are accepted
 :progress-fn       - a function that gets called during uploads. The
                      function should expect four parameters: request,
                      bytes-read, content-length, and item-count.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/multipart_params.clj#L136)

@@ -1,9 +1,11 @@
 # ring.adapter.jetty
 
 
+```
 A Ring adapter that uses the Jetty 9 embedded web server.
 
 Adapters are used to convert Ring handlers into running web servers.
+```
 
 ## run-jetty
 **Type:** var
@@ -13,6 +15,7 @@ Adapters are used to convert Ring handlers into running web servers.
 **Arguments:**
 ```clojure
 [handler options]
+```
 ```
 Start a Jetty webserver to serve the given handler according to the
 supplied options:
@@ -49,5 +52,6 @@ supplied options:
 :request-header-size  - the maximum size of a request header (default 8192)
 :response-header-size - the maximum size of a response header (default 8192)
 :send-server-version? - add Server header to HTTP response (default true)
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-jetty-adapter/src/ring/adapter/jetty.clj#L128)

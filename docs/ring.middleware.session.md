@@ -1,6 +1,7 @@
 # ring.middleware.session
 
 
+```
 Middleware for maintaining browser sessions using cookies.
 
 Sessions are stored using types that adhere to the
@@ -9,6 +10,7 @@ Ring comes with two stores included:
 
   ring.middleware.session.memory/memory-store
   ring.middleware.session.cookie/cookie-store
+```
 
 ## session-request
 **Type:** var
@@ -21,8 +23,10 @@ Ring comes with two stores included:
 [request]
 [request options]
 ```
+```
 Reads current HTTP session map and adds it to :session key of the request.
 See: wrap-session.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/session.clj#L32)
 ## session-response
@@ -36,8 +40,10 @@ See: wrap-session.
 [response request]
 [response request options]
 ```
+```
 Updates session based on :session key in response. See: wrap-session.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/session.clj#L66)
 ## wrap-session
@@ -49,6 +55,7 @@ Updates session based on :session key in response. See: wrap-session.
 ```clojure
 [handler]
 [handler options]
+```
 ```
 Reads in the current HTTP session map, and adds it to the :session key on
 the request. If a :session key is added to the response by the handler, the
@@ -73,5 +80,6 @@ Accepts the following options:
                 Defaults to {:http-only true}. This may be overridden on a
                 per-response basis by adding :session-cookie-attrs to the
                 response.
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/middleware/session.clj#L77)

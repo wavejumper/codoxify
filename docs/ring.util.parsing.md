@@ -1,9 +1,11 @@
 # ring.util.parsing
 
 
+```
 Regular expressions for parsing HTTP.
 
 For internal use.
+```
 
 ## find-content-type-charset
 **Type:** var
@@ -15,8 +17,10 @@ For internal use.
 ```clojure
 [s]
 ```
+```
 Return the charset of a given a content-type string.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/parsing.clj#L26)
 ## re-charset
@@ -26,8 +30,10 @@ Return the charset of a given a content-type string.
 
 
 
+```
 Pattern for pulling the charset out of the content-type header
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/parsing.clj#L21)
 ## re-quoted
@@ -37,8 +43,10 @@ Pattern for pulling the charset out of the content-type header
 
 
 
+```
 HTTP quoted-string: <"> *<any TEXT except "> <">. See RFC2068.
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/parsing.clj#L11)
 ## re-token
@@ -48,8 +56,10 @@ HTTP quoted-string: <"> *<any TEXT except "> <">. See RFC2068.
 
 
 
+```
 HTTP token: 1*<any CHAR except CTLs or tspecials>. See RFC2068
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/parsing.clj#L6)
 ## re-value
@@ -59,7 +69,9 @@ HTTP token: 1*<any CHAR except CTLs or tspecials>. See RFC2068
 
 
 
+```
 HTTP value: token | quoted-string. See RFC2109
 
+```
 
 [View source](http://github.com/ring-clojure/ring/blob/1.8.1/ring-core/src/ring/util/parsing.clj#L16)
