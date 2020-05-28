@@ -58,7 +58,7 @@
                             documents)))))
 
 (defn namespace-section [ns]
-  (write-lines [(format "### [%s](%s)" (:name ns) "#")
+  (write-lines [(format "### [%s](%s)" (:name ns) (str "/" (:name ns)))
                 (when (:doc ns)
                   (write-lines ["" (:doc ns) ""]))
                 (str "Public variables and functions: "
@@ -145,6 +145,7 @@
        "**Dynamic:** true\n")
      (arglists (:arglists v))
      (:doc v)
+     ""
      (when-not nested?
        (view-source ctx v))]))
 
@@ -188,7 +189,6 @@
 
 (defn write-docs
   [{:keys [output-path] :as project}]
-  (prn "OUTPUT PATH => " output-path)
   (make-parent-dir! output-path)
   (doto output-path
     (write! "_sidebar.md" (generate-sidebar-md project))
