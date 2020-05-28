@@ -17,9 +17,11 @@ Add `codoxify` as a dependency to your `project.clj`:
 Without any extra configuration, this will compile your documentation to `target/docs`
 
 ```
+npx init ./target/docs
 npx docsify serve ./target/docs
+lein codox
 ```
 
 ## Example
 
-An example of the [ring](https://github.com/ring-clojure/ring) project generated with codoxify can be found [here]()
+An example of the [ring](https://github.com/ring-clojure/ring) project generated with codoxify can be found [here](https://tscrowley.dev/codoxify/)
