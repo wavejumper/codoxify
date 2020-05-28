@@ -17,7 +17,9 @@ Add `codoxify` as a dependency to your `project.clj`:
 Without any extra configuration, this will compile your documentation to `target/docs`
 
 ```
+npx init ./target/docs
 npx docsify serve ./target/docs
+lein codox
 ```
 
 ## Example
