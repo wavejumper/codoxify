@@ -11,9 +11,9 @@ Follow the installation instructions and usage for [codox](https://github.com/we
 Add `codoxify` as a dependency to your `project.clj`:
 
 ```clojure
-:profiles {:codox {:dependencies [[wavejumper/codoxify "1.0.2"]]
-                   :plugins      [[lein-codox "0.10.7"]]
-                   :codox        {:writer codoxify.writer/write-docs}}}
+{:profiles {:codox {:dependencies [[wavejumper/codoxify "1.0.2"]]
+                    :plugins      [[lein-codox "0.10.7"]]
+                    :codox        {:writer codoxify.writer/write-docs}}}}
 ```
 
 Without any extra configuration, this will compile your documentation to `target/docs`
