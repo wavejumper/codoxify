@@ -132,6 +132,9 @@
 (defn view-source [ctx v]
   (format "[View source](%s)" (var-source-uri ctx v)))
 
+(defn pad-docs [doc]
+  (write-lines ["```" doc "```"]))
+
 (defmethod render-var :default
   [{:keys [nested?] :as ctx} v]
   (let [indentation (if nested? "###" "##")]
@@ -144,7 +147,8 @@
      (when (:dynamic v)
        "**Dynamic:** true\n")
      (arglists (:arglists v))
-     (:doc v)
+     (when (:doc v)
+       (pad-docs (:doc v)))
      ""
      (when-not nested?
        (view-source ctx v))]))
@@ -155,7 +159,8 @@
                (format "## ~%s~" (:name v))
                (format "## %s" (:name v)))
              "**Type:** protocol"
-             (:doc v)]
+             (when (:docs v)
+               (pad-docs (:doc v)))]
             (mapcat (partial render-var (assoc ctx :nested? true)))
             (:members v))
       (conj (format "[View source](%s)" "#"))))
@@ -166,7 +171,7 @@
                       (when (:added ns)
                         (format "**Added:** %s\n" (:added ns)))
                       (when (:doc ns)
-                        (write-lines ["" (:doc ns) ""]))]
+                        (write-lines ["" (pad-docs (:doc ns)) ""]))]
                      (mapcat (partial render-var project))
                      (sorted-public-vars ns))))
 
