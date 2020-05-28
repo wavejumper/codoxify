@@ -29,14 +29,14 @@ lein with-profiles +codox codox
 Edit `./target/docs/index.html` and configure docsify as such:
 
 ```javascript
-    window.$docsify = {
-      loadSidebar: true,
-      subMaxLevel: 3, // important
-      loadNavbar: true,
-      alias: {
-        'sidebar.md': '/_sidebar.md' //important
-      }
-    }
+window.$docsify = {
+  loadSidebar: true,
+  subMaxLevel: 3, // important
+  loadNavbar: true,
+  alias: {
+    'sidebar.md': '/_sidebar.md' //important
+  }
+}
 ```
 
 ## Example
