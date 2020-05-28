@@ -8,5 +8,4 @@ target/
 .nrepl-port
 pom.xml
 .lein-failures
-docs/
 *.edn
