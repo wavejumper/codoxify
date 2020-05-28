@@ -169,7 +169,9 @@
 
 (defn- make-parent-dir!
   [file]
-  (-> file io/file .getParentFile .mkdirs))
+  (try
+    (-> file io/file .getParentFile .mkdirs)
+    (catch Throwable _)))
 
 (defn write!
   [output-dir file s]
@@ -186,6 +188,7 @@
 
 (defn write-docs
   [{:keys [output-path] :as project}]
+  (prn "OUTPUT PATH => " output-path)
   (make-parent-dir! output-path)
   (doto output-path
     (write! "_sidebar.md" (generate-sidebar-md project))
