@@ -83,6 +83,39 @@
     (topics-section (:documents project))
     (namespaces-section (:namespaces project))]))
 
+(defn- split-ns [namespace]
+  (str/split (str namespace) #"\."))
+
+(defn- namespace-parts [namespace]
+  (->> (split-ns namespace)
+       (reductions #(str %1 "." %2))
+       (map symbol)))
+
+(defn- add-depths [namespaces]
+  (->> namespaces
+       (map (juxt identity (comp count split-ns)))
+       (reductions (fn [[_ ds] [ns d]] [ns (cons d ds)]) [nil nil])
+       (rest)))
+
+(defn- add-heights [namespaces]
+  (for [[ns ds] namespaces]
+    (let [d (first ds)
+          h (count (take-while #(not (or (= d %) (= (dec d) %))) (rest ds)))]
+      [ns d h])))
+
+(defn- add-branches [namespaces]
+  (->> (partition-all 2 1 namespaces)
+       (map (fn [[[ns d0 h] [_ d1 _]]] [ns d0 h (= d0 d1)]))))
+
+(defn- namespace-hierarchy [namespaces]
+  (->> (map :name namespaces)
+       (sort)
+       (mapcat namespace-parts)
+       (distinct)
+       (add-depths)
+       (add-heights)
+       (add-branches)))
+
 (defn generate-sidebar-md
   [project]
   (write-lines (into ["* [Overview](/)"]
@@ -120,17 +153,20 @@
   [{:keys [source-uri version git-commit]}
    {:keys [path file line]}]
   (let [path (uri-path path)
-        uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)]
-    (-> uri
-        (str/replace   "{filepath}"   path)
-        (str/replace   "{classpath}"  (uri-path file))
-        (str/replace   "{basename}"   (uri-basename path))
-        (str/replace   "{line}"       (str line))
-        (str/replace   "{version}"    (str version))
-        (force-replace "{git-commit}" git-commit))))
+        uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)
+        uri  (when-not (str/blank? uri)
+               uri)]
+    (some-> uri
+            (str/replace   "{filepath}"   path)
+            (str/replace   "{classpath}"  (uri-path file))
+            (str/replace   "{basename}"   (uri-basename path))
+            (str/replace   "{line}"       (str line))
+            (str/replace   "{version}"    (str version))
+            (force-replace "{git-commit}" git-commit))))
 
 (defn view-source [ctx v]
-  (format "[View source](%s)" (var-source-uri ctx v)))
+  (when-let [uri (var-source-uri ctx v)]
+    (format "[View source](%s)" uri)))
 
 (defn pad-docs [doc]
   (write-lines ["```" doc "```"]))
