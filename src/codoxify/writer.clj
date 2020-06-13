@@ -152,10 +152,8 @@
 (defn- var-source-uri
   [{:keys [source-uri version git-commit]}
    {:keys [path file line]}]
-  (let [path (uri-path path)
-        uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)
-        uri  (when-not (str/blank? uri)
-               uri)]
+  (let [path (some-> path uri-path)
+        uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)]
     (some-> uri
             (str/replace   "{filepath}"   path)
             (str/replace   "{classpath}"  (uri-path file))
