@@ -195,7 +195,7 @@
                (format "## ~%s~" (:name v))
                (format "## %s" (:name v)))
              "**Type:** protocol"
-             (when (:docs v)
+             (when (:doc v)
                (pad-docs (:doc v)))]
             (mapcat (partial render-var (assoc ctx :nested? true)))
             (:members v))
@@ -205,9 +205,9 @@
   [project ns]
   (write-lines (into [(format "# %s" (:name ns))
                       (when (:added ns)
-                        (format "**Added:** %s\n" (:added ns)))
+                        [(format "**Added:** %s\n" (:added ns))])
                       (when (:doc ns)
-                        (write-lines ["" (pad-docs (:doc ns)) ""]))]
+                        ["" (pad-docs (:doc ns)) ""])]
                      (mapcat (partial render-var project))
                      (sorted-public-vars ns))))
 
