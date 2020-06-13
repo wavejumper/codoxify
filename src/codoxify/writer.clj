@@ -152,19 +152,21 @@
 (defn- var-source-uri
   [{:keys [source-uri version git-commit]}
    {:keys [path file line]}]
-  (let [path (some-> path uri-path)
+  (let [path (uri-path path)
         uri  (if (map? source-uri) (get-source-uri source-uri path) source-uri)]
-    (some-> uri
-            (str/replace   "{filepath}"   path)
-            (str/replace   "{classpath}"  (uri-path file))
-            (str/replace   "{basename}"   (uri-basename path))
-            (str/replace   "{line}"       (str line))
-            (str/replace   "{version}"    (str version))
-            (force-replace "{git-commit}" git-commit))))
+    (-> uri
+        (str/replace   "{filepath}"   path)
+        (str/replace   "{classpath}"  (uri-path file))
+        (str/replace   "{basename}"   (uri-basename path))
+        (str/replace   "{line}"       (str line))
+        (str/replace   "{version}"    (str version))
+        (force-replace "{git-commit}" git-commit))))
 
 (defn view-source [ctx v]
-  (when-let [uri (var-source-uri ctx v)]
-    (format "[View source](%s)" uri)))
+  ;; TOOD: fix this...
+  (try
+    (format "[View source](%s)" (var-source-uri ctx v))
+    (catch Throwable _ nil)))
 
 (defn pad-docs [doc]
   (write-lines ["```" doc "```"]))
