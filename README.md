@@ -1,3 +1,5 @@
+[![Clojars Project](https://img.shields.io/clojars/v/wavejumper/codoxify.svg)](https://clojars.org/wavejumper/codoxify)
+
 # codoxify
 
 Use [codox](https://github.com/weavejester/codox) to build Clojure documentation for [docsify](https://github.com/docsifyjs/docsify)
@@ -9,7 +11,7 @@ Follow the installation instructions and usage for [codox](https://github.com/we
 Add `codoxify` as a dependency to your `project.clj`:
 
 ```clojure
-:profiles {:codox {:dependencies [[wavejumper/codoxify "1.0.0"]]
+:profiles {:codox {:dependencies [[wavejumper/codoxify "1.0.2"]]
                    :plugins      [[lein-codox "0.10.7"]]
                    :codox        {:writer codoxify.writer/write-docs}}}
 ```
@@ -17,24 +19,24 @@ Add `codoxify` as a dependency to your `project.clj`:
 Without any extra configuration, this will compile your documentation to `target/docs`
 
 ```
-npx init ./target/docs
+npx docsify init ./target/docs
 npx docsify serve ./target/docs
 lein with-profiles +codox codox
 ```
 
 ### docsify configuration
 
-edit `./target/docs/index.html` and configure docsify as such:
+Edit `./target/docs/index.html` and configure docsify as such:
 
 ```javascript
-    window.$docsify = {
-      loadSidebar: true,
-      subMaxLevel: 3, // important
-      loadNavbar: true,
-      alias: {
-        'sidebar.md': '/_sidebar.md' //important
-      }
-    }
+window.$docsify = {
+  loadSidebar: true,
+  subMaxLevel: 3, // important
+  loadNavbar: true,
+  alias: {
+    'sidebar.md': '/_sidebar.md' //important
+  }
+}
 ```
 
 ## Example
