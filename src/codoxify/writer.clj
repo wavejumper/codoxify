@@ -1,7 +1,8 @@
 (ns codoxify.writer
   (:require [clojure.string :as str]
             [clojure.java.io :as io])
-  (:import (java.io File)))
+  (:import (java.io File)
+           (java.net URLEncoder)))
 
 (defn- strip-prefix [s prefix]
   (if s (str/replace s (re-pattern (str "(?i)^" prefix)) "")))
@@ -63,7 +64,8 @@
                   (write-lines ["" (:doc ns) ""]))
                 (str "Public variables and functions: "
                      (str/join " " (map (fn [v]
-                                          (format "[%s](%s)" (:name v) (str "/" (:name ns) "?id=" (:name v))))
+                                          (let [id (URLEncoder/encode ^String (:name v) "UTF-8")]
+                                            (format "[%s](%s)" (:name v) (str "/" (:name ns) "?id=" id))))
                                         (sorted-public-vars ns))))]))
 
 (defn namespaces-section
