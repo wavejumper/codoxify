@@ -1,4 +1,4 @@
-(defproject wavejumper/codoxify "1.0.7"
+(defproject wavejumper/codoxify "1.0.8"
   :description "Generate Clojure docs for docsify"
   :url "https://github.com/wavejumper/codox"
 
