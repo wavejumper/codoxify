@@ -64,7 +64,7 @@
                   (write-lines ["" (:doc ns) ""]))
                 (str "Public variables and functions: "
                      (str/join " " (map (fn [v]
-                                          (let [id (URLEncoder/encode ^String (:name v) "UTF-8")]
+                                          (let [id (URLEncoder/encode ^String (str (:name v)) "UTF-8")]
                                             (format "[%s](%s)" (:name v) (str "/" (:name ns) "?id=" id))))
                                         (sorted-public-vars ns))))]))
 
