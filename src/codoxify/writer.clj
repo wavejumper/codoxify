@@ -58,21 +58,23 @@
                               ["* [%s](%s)" (:title doc) (doc-filename doc)])
                             documents)))))
 
-(defn namespace-section [ns]
-  (write-lines [(format "### [%s](%s)" (:name ns) (str "/" (:name ns)))
-                (when (:doc ns)
-                  (write-lines ["" (:doc ns) ""]))
-                (str "Public variables and functions: "
-                     (str/join " " (map (fn [v]
-                                          (let [id (URLEncoder/encode ^String (str (:name v)) "UTF-8")]
-                                            (format "[%s](%s)" (:name v) (str "/" (:name ns) "?id=" id))))
-                                        (sorted-public-vars ns))))]))
+(defn namespace-section
+  [project ns]
+  (let [docsify-path (get project :docsify-path "/")]
+    (write-lines [(format "### [%s](%s)" (:name ns) (str docsify-path (:name ns)))
+                  (when (:doc ns)
+                    (write-lines ["" (:doc ns) ""]))
+                  (str "Public variables and functions: "
+                       (str/join " " (map (fn [v]
+                                            (let [id (URLEncoder/encode ^String (str (:name v)) "UTF-8")]
+                                              (format "[%s](%s)" (:name v) (str docsify-path (:name ns) "?id=" id))))
+                                          (sorted-public-vars ns))))])))
 
 (defn namespaces-section
-  [namespaces]
+  [project namespaces]
   (let [namespaces (sort-by :name namespaces)]
     (write-lines (into ["## Namespaces"]
-                       (map namespace-section)
+                       (map (partial namespace-section project))
                        namespaces))))
 
 (defn generate-index-md
@@ -83,7 +85,7 @@
     (license-section (:license project))
     (package-section (package project) (:version project))
     (topics-section (:documents project))
-    (namespaces-section (:namespaces project))]))
+    (namespaces-section project (:namespaces project))]))
 
 (defn- split-ns [namespace]
   (str/split (str namespace) #"\."))
@@ -120,10 +122,11 @@
 
 (defn generate-sidebar-md
   [project]
-  (write-lines (into ["* [Overview](/)"]
-                     (map (fn [ns]
-                            (format "* [%s](%s)" (:name ns) (str "/" (:name ns)))))
-                     (sort-by :name (:namespaces project)))))
+  (let [docsify-path (get project :docsify-path "/")]
+    (write-lines (into ["* [Overview](/)"]
+                       (map (fn [ns]
+                              (format "* [%s](%s)" (:name ns) (str docsify-path (:name ns)))))
+                       (sort-by :name (:namespaces project))))))
 
 (defn arglists [args]
   (when (seq args)
